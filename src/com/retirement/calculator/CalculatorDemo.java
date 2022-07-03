@@ -35,6 +35,9 @@ public class CalculatorDemo {
 		driver.get(CalculatorConstants.TEST_URL);
 	}
 
+	/**
+	 * This method calculates without social benefits and default adjustment
+	 */
 	@Test(description="This method calculates without social benefits and default adjustment")
 	public void formSubmissionWithoutSocialBenefits() {
 		driver.findElement(By.id("current-age")).sendKeys(CalculatorConstants.CURRENT_AGE);
@@ -62,6 +65,9 @@ public class CalculatorDemo {
 		driver.findElement(By.xpath(CalculatorConstants.XPATH_CALCULATE_BUTTON)).click();
 	}
 
+	/**
+	 * This method calculates with social benefits and no default adjustment
+	 */
 	@Test(description="This method calculates with social benefits and no default adjustment")
 	public void formSubmissionWithSocialBenefitsNoAdjustments() {
 		driver.findElement(By.id("current-age")).sendKeys(CalculatorConstants.CURRENT_AGE);
@@ -90,10 +96,14 @@ public class CalculatorDemo {
 
 		WebElement overRideAmount = driver.findElement(By.id("social-security-override"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.OVERRIDE_AMOUNT, overRideAmount);
+		
 		//Clicked the calculate button without default adjustment
 		driver.findElement(By.xpath(CalculatorConstants.XPATH_CALCULATE_BUTTON)).click();
 	}
 
+	/**
+	 * This method calculates with social benefits and default adjustment
+	 */
 	@Test(description="This method calculates with social benefits and default adjustment")
 	public void formSubmissionWithSocialBenefitsAndAdjustments() {
 		driver.findElement(By.id("current-age")).sendKeys(CalculatorConstants.CURRENT_AGE);
@@ -121,6 +131,7 @@ public class CalculatorDemo {
 
 		WebElement overRideAmount = driver.findElement(By.id("social-security-override"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].value =" + CalculatorConstants.OVERRIDE_AMOUNT, overRideAmount);
+		
 		//Clicked on default adjustment
 		driver.findElement(By.xpath(CalculatorConstants.XPATH_DEFAULT_ADJUSTMENT_LINK)).click();
 
