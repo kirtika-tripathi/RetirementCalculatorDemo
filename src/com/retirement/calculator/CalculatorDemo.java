@@ -38,8 +38,8 @@ public class CalculatorDemo {
 	/**
 	 * This method calculates without social benefits and default adjustment
 	 */
-	@Test(description="This method calculates without social benefits and default adjustment")
-	public void formSubmissionWithoutSocialBenefits() {
+	@Test(description="This method calculates without social benefits and no default adjustment")
+	public void formSubmissionWithoutSocialBenefitsNoAdjustments() {
 		driver.findElement(By.id("current-age")).sendKeys(CalculatorConstants.CURRENT_AGE);
 
 		driver.findElement(By.id("retirement-age")).sendKeys(CalculatorConstants.RETIREMENT_AGE);
