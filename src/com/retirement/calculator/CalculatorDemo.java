@@ -40,27 +40,15 @@ public class CalculatorDemo {
 	 */
 	@Test(description="This method calculates without social benefits and no default adjustment")
 	public void formSubmissionWithoutSocialBenefitsNoAdjustments() {
-		driver.findElement(By.id("current-age")).sendKeys(CalculatorConstants.CURRENT_AGE);
-
-		driver.findElement(By.id("retirement-age")).sendKeys(CalculatorConstants.RETIREMENT_AGE);
-
-		WebElement currentIncome = driver.findElement(By.id("current-income"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.CURRENT_INCOME, currentIncome);
-
-		WebElement spouseIncome = driver.findElement(By.id("spouse-income"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.SPOUSE_INCOME, spouseIncome);
-
-		WebElement currentTotalSavings = driver.findElement(By.id("current-total-savings"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.CURRENT_TOTAL_SAVINGS, currentTotalSavings);
-
-		driver.findElement(By.id("current-annual-savings")).sendKeys(CalculatorConstants.PERCENTAGE_CURRENT_SAVINGS);
-
-		driver.findElement(By.id("savings-increase-rate")).sendKeys(CalculatorConstants.PERCENTAGE_INCREASE_RATE);	
-
+		sendElementKeys("current-age",CalculatorConstants.CURRENT_AGE); 
+		sendElementKeys("retirement-age",CalculatorConstants.RETIREMENT_AGE);
+		setLocatorValue("current-income",CalculatorConstants.CURRENT_INCOME);
+		setLocatorValue("spouse-income",CalculatorConstants.SPOUSE_INCOME);
+		setLocatorValue("current-total-savings",CalculatorConstants.CURRENT_TOTAL_SAVINGS);
+		sendElementKeys("current-annual-savings",CalculatorConstants.PERCENTAGE_CURRENT_SAVINGS);
+		sendElementKeys("savings-increase-rate",CalculatorConstants.PERCENTAGE_INCREASE_RATE);
 		//No Social benefits selected
-		WebElement noSocialBenefits = driver.findElement(By.id("no-social-benefits"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", noSocialBenefits);
-
+		setLocatorStatus("no-social-benefits", "true");
 		//Calculate button clicked
 		driver.findElement(By.xpath(CalculatorConstants.XPATH_CALCULATE_BUTTON)).click();
 	}
@@ -70,33 +58,19 @@ public class CalculatorDemo {
 	 */
 	@Test(description="This method calculates with social benefits and no default adjustment")
 	public void formSubmissionWithSocialBenefitsNoAdjustments() {
-		driver.findElement(By.id("current-age")).sendKeys(CalculatorConstants.CURRENT_AGE);
-
-		driver.findElement(By.id("retirement-age")).sendKeys(CalculatorConstants.RETIREMENT_AGE);
-
-		WebElement currentIncome = driver.findElement(By.id("current-income"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.CURRENT_INCOME, currentIncome);
-
-		WebElement spouseIncome = driver.findElement(By.id("spouse-income"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.SPOUSE_INCOME, spouseIncome);
-
-		WebElement currentTotalSavings = driver.findElement(By.id("current-total-savings"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.CURRENT_TOTAL_SAVINGS, currentTotalSavings);
-
-		driver.findElement(By.id("current-annual-savings")).sendKeys(CalculatorConstants.PERCENTAGE_CURRENT_SAVINGS);
-
-		driver.findElement(By.id("savings-increase-rate")).sendKeys(CalculatorConstants.PERCENTAGE_INCREASE_RATE);	
+		sendElementKeys("current-age",CalculatorConstants.CURRENT_AGE); 
+		sendElementKeys("retirement-age",CalculatorConstants.RETIREMENT_AGE);
+		setLocatorValue("current-income",CalculatorConstants.CURRENT_INCOME);
+		setLocatorValue("spouse-income",CalculatorConstants.SPOUSE_INCOME);
+		setLocatorValue("current-total-savings",CalculatorConstants.CURRENT_TOTAL_SAVINGS);
+		sendElementKeys("current-annual-savings",CalculatorConstants.PERCENTAGE_CURRENT_SAVINGS);
+		sendElementKeys("savings-increase-rate",CalculatorConstants.PERCENTAGE_INCREASE_RATE);
 
 		//Selected Social benefits
-		WebElement socialBenefits = driver.findElement(By.id("yes-social-benefits"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", socialBenefits);
+		setLocatorStatus("yes-social-benefits", "true");
+		setLocatorStatus("married", "true");
+		setLocatorValue("social-security-override",CalculatorConstants.OVERRIDE_AMOUNT);
 
-		WebElement maritalStatus = driver.findElement(By.id("married"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", maritalStatus);
-
-		WebElement overRideAmount = driver.findElement(By.id("social-security-override"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.OVERRIDE_AMOUNT, overRideAmount);
-		
 		//Clicked the calculate button without default adjustment
 		driver.findElement(By.xpath(CalculatorConstants.XPATH_CALCULATE_BUTTON)).click();
 	}
@@ -106,58 +80,43 @@ public class CalculatorDemo {
 	 */
 	@Test(description="This method calculates with social benefits and default adjustment")
 	public void formSubmissionWithSocialBenefitsAndAdjustments() {
-		driver.findElement(By.id("current-age")).sendKeys(CalculatorConstants.CURRENT_AGE);
-
-		driver.findElement(By.id("retirement-age")).sendKeys(CalculatorConstants.RETIREMENT_AGE);
-
-		WebElement currentIncome = driver.findElement(By.id("current-income"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.CURRENT_INCOME, currentIncome);
-
-		WebElement spouseIncome = driver.findElement(By.id("spouse-income"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.SPOUSE_INCOME, spouseIncome);
-
-		WebElement currentTotalSavings = driver.findElement(By.id("current-total-savings"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = "+ CalculatorConstants.CURRENT_TOTAL_SAVINGS, currentTotalSavings);
-
-		driver.findElement(By.id("current-annual-savings")).sendKeys(CalculatorConstants.PERCENTAGE_CURRENT_SAVINGS);
-
-		driver.findElement(By.id("savings-increase-rate")).sendKeys(CalculatorConstants.PERCENTAGE_INCREASE_RATE);	
-
-		WebElement socialBenefits = driver.findElement(By.id("yes-social-benefits"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", socialBenefits);
-
-		WebElement maritalStatus = driver.findElement(By.id("married"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", maritalStatus);
-
-		WebElement overRideAmount = driver.findElement(By.id("social-security-override"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value =" + CalculatorConstants.OVERRIDE_AMOUNT, overRideAmount);
-		
+		sendElementKeys("current-age",CalculatorConstants.CURRENT_AGE); 
+		sendElementKeys("retirement-age",CalculatorConstants.RETIREMENT_AGE);
+		setLocatorValue("current-income",CalculatorConstants.CURRENT_INCOME);
+		setLocatorValue("spouse-income",CalculatorConstants.SPOUSE_INCOME);
+		setLocatorValue("current-total-savings",CalculatorConstants.CURRENT_TOTAL_SAVINGS);
+		sendElementKeys("current-annual-savings",CalculatorConstants.PERCENTAGE_CURRENT_SAVINGS);
+		sendElementKeys("savings-increase-rate",CalculatorConstants.PERCENTAGE_INCREASE_RATE);
+		//Select Social Benefits
+		setLocatorStatus("yes-social-benefits", "true");
+		setLocatorStatus("married", "true");
+		setLocatorValue("social-security-override",CalculatorConstants.OVERRIDE_AMOUNT);
 		//Clicked on default adjustment
 		driver.findElement(By.xpath(CalculatorConstants.XPATH_DEFAULT_ADJUSTMENT_LINK)).click();
-
-		WebElement additionalIncome = driver.findElement(By.id("additional-income"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value =" + CalculatorConstants.ADDITIONAL_INCOME, additionalIncome);
-
-		driver.findElement(By.id("retirement-duration")).sendKeys(CalculatorConstants.RETIREMENT_DURATION);
-
-		WebElement includeInflation = driver.findElement(By.id("include-inflation"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", includeInflation);
-
-		WebElement annualIncome = driver.findElement(By.id("retirement-annual-income"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value =" + CalculatorConstants.RETIREMENT_ANNUAL_INCOME, annualIncome);
-
-		WebElement rateOfInterest = driver.findElement(By.id("pre-retirement-roi"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value =" + CalculatorConstants.PRE_RETIREMENT_ROI, rateOfInterest);
-
-		WebElement postrateOfInterest = driver.findElement(By.id("post-retirement-roi"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value =" + CalculatorConstants.POST_RETIREMENT_ROI, postrateOfInterest );
-		//Save changes clicked
+		setLocatorValue("additional-income", CalculatorConstants.ADDITIONAL_INCOME);
+		sendElementKeys("retirement-duration",CalculatorConstants.RETIREMENT_DURATION);
+		setLocatorStatus("include-inflation", "true");
+		setLocatorValue("retirement-annual-income", CalculatorConstants.RETIREMENT_ANNUAL_INCOME);
+		setLocatorValue("pre-retirement-roi", CalculatorConstants.PRE_RETIREMENT_ROI);
+		setLocatorValue("post-retirement-roi", CalculatorConstants.POST_RETIREMENT_ROI);
 		driver.findElement(By.xpath(CalculatorConstants.XPATH_SAVE_CHANGES_BUTTON)).click();
 		//calculate button clicked
 		driver.findElement(By.xpath(CalculatorConstants.XPATH_CALCULATE_BUTTON)).click();
-
 	}
 
+	public void setLocatorValue(String locator,String value) {
+		WebElement element = driver.findElement(By.id(locator));
+		((JavascriptExecutor) driver).executeScript("arguments[0].value = " + value, element );
+	}
+
+	public void setLocatorStatus(String locator,String status) {
+		WebElement element = driver.findElement(By.id(locator));
+		((JavascriptExecutor) driver).executeScript("arguments[0].checked = " + status, element );
+	}
+
+	public void sendElementKeys(String locator,String value) {
+		driver.findElement(By.id(locator)).sendKeys(value);
+	}
 	@AfterMethod
 	public void postSubmission() {
 		System.out.println("Form submission successful!");
@@ -165,6 +124,7 @@ public class CalculatorDemo {
 
 	@AfterClass
 	public void afterClass() {
+		driver.close();
 		driver.quit();
 	}
 }
